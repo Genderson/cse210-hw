@@ -8,21 +8,38 @@ namespace Develop02
 {
     public class File
     {
-        public void SaveToFile(string fileName){
+        public void SaveToFile(string fileName, List<Entry> entries){
             
             using (StreamWriter outputFile = new StreamWriter(fileName))
             {
-                // You can add text to the file with the WriteLine method
-                outputFile.WriteLine("This will be the first line in the file.");
-                
-                // You can use the $ and include variables just like with Console.WriteLine
-                string color = "Blue";
-                outputFile.WriteLine($"My favorite color is {color}");
+                foreach (var entry in entries)
+                {
+                    string data = $"{entry._date}|{entry._prompt}|{entry._response}";
+                    outputFile.WriteLine(data);
+                }                
             }
         }
 
-        public void LoadFromFile(string fileName){
-            
+        public List<Entry> LoadFromFile(string fileName){
+            List<Entry> entries = new List<Entry>();
+            string[] lines = System.IO.File.ReadAllLines(fileName);
+
+            foreach (string line in lines)
+            {
+                string[] parts = line.Split("|");
+
+                string date = parts[0];
+                string prompt = parts[1];
+                string response = parts[2];
+                entries.Add(new Entry 
+                {
+                    _date = date, 
+                    _prompt = prompt, 
+                    _response = response 
+                });
+            }
+
+            return entries;
         }
     }
 }

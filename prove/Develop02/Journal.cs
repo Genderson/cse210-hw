@@ -29,12 +29,13 @@ namespace Develop02
             });
         }
 
-        public void SaveToFile(){
-            
+        public void SaveToFile(string fileName){
+
+            _file.SaveToFile(fileName, _entries);
         }
 
-        public void LoadFromFile(){
-            
+        public void LoadFromFile(string fileName){
+            _entries = _file.LoadFromFile(fileName);
         }
 
         public string DisplayJournal(){
