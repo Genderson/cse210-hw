@@ -12,7 +12,7 @@ namespace Develop02
         public string _date;
 
         public string Display(){
-            return $"Date: {_date} - Prompt: {_prompt} {_response}";
+            return $"Date: {_date} - Prompt: {_prompt} - Response: {_response} \r\n";
         }
     }
 }

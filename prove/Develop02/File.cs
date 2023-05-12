@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.IO;
-
+using Newtonsoft.Json;
 namespace Develop02
 {
     public class File
@@ -12,17 +12,23 @@ namespace Develop02
             
             using (StreamWriter outputFile = new StreamWriter(fileName))
             {
-                foreach (var entry in entries)
-                {
+                var jsonEntries = JsonConvert.SerializeObject(entries);
+                outputFile.WriteLine(jsonEntries);
+
+                /*foreach (var entry in entries)
+                {                    
                     string data = $"{entry._date}|{entry._prompt}|{entry._response}";
                     outputFile.WriteLine(data);
-                }                
+                }*/
             }
         }
 
         public List<Entry> LoadFromFile(string fileName){
             List<Entry> entries = new List<Entry>();
-            string[] lines = System.IO.File.ReadAllLines(fileName);
+            
+            var data = System.IO.File.ReadAllText(fileName);
+            entries = JsonConvert.DeserializeObject<List<Entry>>(data);
+            /*string[] lines = System.IO.File.ReadAllLines(fileName);
 
             foreach (string line in lines)
             {
@@ -37,7 +43,7 @@ namespace Develop02
                     _prompt = prompt, 
                     _response = response 
                 });
-            }
+            }*/
 
             return entries;
         }

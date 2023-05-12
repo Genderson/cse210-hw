@@ -13,6 +13,7 @@ namespace Develop02
             PopulatePromptList();
         }
         
+        
         public string GetPrompt(){
             Random rnd = new Random();
             int position  = rnd.Next(0, _prompts.Count);
@@ -26,10 +27,11 @@ namespace Develop02
                     "What was the best part of my day?",
                     "How did I see the hand of the Lord in my life today?",
                     "What was the strongest emotion I felt today?",
-                    "If I had one thing I could do over today, what would it be?"
-                });
-
-                
+                    "If I had one thing I could do over today, what would it be?",
+                    "What things am I thankful for?",
+                    "Today I had the opportunity to help someone?",
+                    "What did I learn from my family today?"
+                });                
         }
     }
 }

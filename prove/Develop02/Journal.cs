@@ -8,7 +8,6 @@ namespace Develop02
     public class Journal
     {
         private List<Entry> _entries = new List<Entry>();
-     
         private readonly File _file;
         private readonly PromptGenerator _promptGenerator;
 
@@ -30,11 +29,12 @@ namespace Develop02
         }
 
         public void SaveToFile(string fileName){
-
+            fileName = $"{fileName}.json";
             _file.SaveToFile(fileName, _entries);
         }
 
         public void LoadFromFile(string fileName){
+            fileName = $"{fileName}.json";
             _entries = _file.LoadFromFile(fileName);
         }
 
