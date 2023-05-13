@@ -1,6 +1,11 @@
 using System;
 using Develop02;
 
+///EXCEDDING REQUIREMENTS
+/*
+I saved and loaded my document in a JSON format
+Also, if the user types a wrong option number I notify about it, and give a chance to retry 
+*/
 class Program
 {
     private static readonly Journal _journal = new Journal();
