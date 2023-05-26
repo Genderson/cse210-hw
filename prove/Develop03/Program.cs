@@ -5,32 +5,31 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello Develop03 World!");
-
         string text = "Y después de haber ayunado cuarenta días y cuarenta noches, tuvo hambre.";
         Reference _reference = new Reference("Mateo", 4, 2);
         Scripture _scripture = new Scripture(text, _reference);
 
-        var reference = _reference.DisplayReference();
-        var textShow = _scripture.GetRenderedText();
-        Console.WriteLine($"{reference} {textShow}");
+        string entry = string.Empty;
+        int index = _scripture.GetCount() + 1;
 
-        Console.WriteLine("Press enter to continue or type 'quit' to finish:");
-        Console.ReadLine();
-
-        int count = 0;
-        while(count < 7){
-            count++;
+        while(index > 0 && !entry.Equals("quit", StringComparison.OrdinalIgnoreCase))
+        {
             Console.Clear();
 
-            _scripture.HideWord();
+            var reference = _reference.DisplayReference();
+            var textShow = _scripture.GetRenderedText();
 
-            reference = _reference.DisplayReference();
-            textShow = _scripture.GetRenderedText();
             Console.WriteLine($"{reference} {textShow}");
+            Console.WriteLine();
+            Console.WriteLine("Press enter to continue or type 'quit' to finish:");    
 
-            Console.WriteLine("Press enter to continue or type 'quit' to finish:");
-            Console.ReadLine();
+            if(_scripture.IsAnyWordVisible())  
+            {
+                _scripture.HideWord();
+            }      
+               
+            index--;
+            entry = Console.ReadLine();
         }
     }
 }

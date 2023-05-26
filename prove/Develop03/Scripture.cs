@@ -11,6 +11,7 @@ namespace Develop03
         private string _text;
         private readonly Reference _reference;       
         private List<Word> _words;
+        private int _count;
 
         public Scripture(string text, Reference reference){
             _text = text;
@@ -19,16 +20,10 @@ namespace Develop03
             SplitWords();
         }
 
-        private void SplitWords(){
-            foreach (var item in _text.Split(" "))
-            {
-                _words.Add(new Word(item));
-            }
-        }
-
         public void HideWord(){
             var word = new Word();
-            
+            bool isHidden = false;
+
             do
             {
                 Random rnd = new Random();
@@ -37,9 +32,10 @@ namespace Develop03
 
                 if(!word.GetIsHidden()){
                     word.HideWord();
+                    isHidden = true;
                 }
 
-            } while (word.GetIsHidden() == false);            
+            } while (isHidden == false);            
         }
 
         public string GetRenderedText(){
@@ -50,6 +46,22 @@ namespace Develop03
             } 
 
             return response.ToString().Trim();
+        }
+
+        private void SplitWords(){
+            foreach (var item in _text.Split(" "))
+            {
+                _words.Add(new Word(item));
+            }
+        }
+
+        public int GetCount(){
+            return _words.Where(w => !w.GetIsHidden()).ToList().Count;
+        }
+        public bool IsAnyWordVisible(){
+            var count = _words.Where(w => !w.GetIsHidden()).ToList().Count;
+
+            return count > 0;
         }
     }
 }
