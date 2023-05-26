@@ -38,6 +38,16 @@ namespace Develop03
             } while (isHidden == false);            
         }
 
+        public int GetCount(){
+            return _words.Where(w => !w.GetIsHidden()).ToList().Count;
+        }
+
+        public bool IsAnyWordVisible(){
+            var count = _words.Where(w => !w.GetIsHidden()).ToList().Count;
+
+            return count > 0;
+        }
+
         public string GetRenderedText(){
             StringBuilder response = new StringBuilder();
             foreach (var word in _words)
@@ -53,15 +63,6 @@ namespace Develop03
             {
                 _words.Add(new Word(item));
             }
-        }
-
-        public int GetCount(){
-            return _words.Where(w => !w.GetIsHidden()).ToList().Count;
-        }
-        public bool IsAnyWordVisible(){
-            var count = _words.Where(w => !w.GetIsHidden()).ToList().Count;
-
-            return count > 0;
         }
     }
 }
