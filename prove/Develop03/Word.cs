@@ -7,14 +7,16 @@ namespace Develop03
         private bool _isHidden;
 
         public Word(){}
-        public Word(string text){
+        public Word(string text)
+        {
             _text = text;
             _isHidden = false;
         }
 
         public string GetText() => _text;
         public bool GetIsHidden() => _isHidden;
-        public void HideWord(){
+        public void HideWord()
+        {
             int count = _text.Count();
             string hideText = string.Empty;
 

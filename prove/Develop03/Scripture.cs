@@ -9,7 +9,8 @@ namespace Develop03
         private List<Word> _words;
 
         public Scripture(){}
-        public Scripture(string text, Reference reference){
+        public Scripture(string text, Reference reference)
+        {
             _text = text;
             _reference = reference;
             _words = new List<Word>();
@@ -17,7 +18,8 @@ namespace Develop03
         }
 
         public Reference GetReference() => _reference;
-        public void HideWord(){
+        public void HideWord()
+        {
             var word = new Word();
             bool isHidden = false;
 
@@ -36,7 +38,8 @@ namespace Develop03
         }
         public int GetCount() => _words.Where(w => !w.GetIsHidden()).ToList().Count;
         public bool IsAnyWordVisible() => _words.Where(w => !w.GetIsHidden()).ToList().Count > 0;
-        public string GetRenderedText(){
+        public string GetRenderedText()
+        {
             StringBuilder response = new StringBuilder();
             foreach (var word in _words)
             {
@@ -46,7 +49,8 @@ namespace Develop03
             return response.ToString().Trim();
         }
         
-        private void SplitWords(){
+        private void SplitWords()
+        {
             foreach (var item in _text.Split(" "))
             {
                 _words.Add(new Word(item));

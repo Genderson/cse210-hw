@@ -86,7 +86,8 @@ class Program
         }
     }
 
-    private static Scripture GetScriptures(){
+    private static Scripture GetScriptures()
+    {
         List<Scripture> scriptures = new List<Scripture>();
         scriptures.Add(new Scripture("And now, I, Nephi, speak concerning the prophecies of which " + 
         "my father hath spoken, concerning Joseph, who was carried into Egypt.", new Reference("2 Nephi", 4, 1)));
