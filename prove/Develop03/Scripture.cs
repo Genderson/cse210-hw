@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Develop03
 {
@@ -11,8 +7,8 @@ namespace Develop03
         private string _text;
         private readonly Reference _reference;       
         private List<Word> _words;
-        private int _count;
 
+        public Scripture(){}
         public Scripture(string text, Reference reference){
             _text = text;
             _reference = reference;
@@ -20,6 +16,7 @@ namespace Develop03
             SplitWords();
         }
 
+        public Reference GetReference() => _reference;
         public void HideWord(){
             var word = new Word();
             bool isHidden = false;
@@ -37,17 +34,8 @@ namespace Develop03
 
             } while (isHidden == false);            
         }
-
-        public int GetCount(){
-            return _words.Where(w => !w.GetIsHidden()).ToList().Count;
-        }
-
-        public bool IsAnyWordVisible(){
-            var count = _words.Where(w => !w.GetIsHidden()).ToList().Count;
-
-            return count > 0;
-        }
-
+        public int GetCount() => _words.Where(w => !w.GetIsHidden()).ToList().Count;
+        public bool IsAnyWordVisible() => _words.Where(w => !w.GetIsHidden()).ToList().Count > 0;
         public string GetRenderedText(){
             StringBuilder response = new StringBuilder();
             foreach (var word in _words)
@@ -57,7 +45,7 @@ namespace Develop03
 
             return response.ToString().Trim();
         }
-
+        
         private void SplitWords(){
             foreach (var item in _text.Split(" "))
             {
