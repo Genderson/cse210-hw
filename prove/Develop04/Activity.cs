@@ -10,21 +10,34 @@ namespace Develop04
         private string _name;
         private string _description;
         private int _duration;
+        private List<ActivityInformation> _activityCount;
+        private readonly File _file;
+        private const string FILENAME = "ActivityLog.json";
 
+        public Activity()
+        {
+            _file = new File();
+            LoadFromFile();
+        }
         public Activity(string name, string description)
         {
+            _file = new File();
+            _activityCount = new List<ActivityInformation>();
             _name = name;
             _description = description;
+            LoadFromFile();
         }
 
-        public string DisplayStartMessage(){
+        public string DisplayStartMessage()
+        {
             string message = $"Welcome to the {_name} Activity.\n\n";
             message += $"{_description}\n\n";
             message += $"How long, in seconds, would you like for your session? ";
             return message;
         }
 
-        public string DisplayEndMessage(){
+        public string DisplayEndMessage()
+        {
             string message = $"You have completed another {_duration} seconds of the {_name} Activity.\n";
             return message;
         }
@@ -37,8 +50,27 @@ namespace Develop04
 
         public int GetDuration() => _duration;
 
-        public void PauseScreen(){
+        public void SaveActivity(string name)
+        {
+            ActivityInformation activity = _activityCount.FirstOrDefault(c => c.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            
+            if (activity == null)
+            {
+                activity = new ActivityInformation { Name = name, Count = 1};
+                _activityCount.Add(activity);
+            }
+            else
+            {
+                activity.Count += 1;
+            }
 
+            SaveToFile();        
         }
+
+        public List<ActivityInformation> ShowNumberOfActivities() => _activityCount;
+
+        private void SaveToFile() => _file.SaveToFile(FILENAME, _activityCount);
+
+        private void LoadFromFile() => _activityCount = _file.LoadFromFile(FILENAME);
     }
 }

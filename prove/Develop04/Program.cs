@@ -5,20 +5,19 @@ class Program
 {
     static void Main(string[] args)
     {
-        //DisplayHelper.ReverseTimer(5);
-        //DisplayHelper.Spinner();
         Console.Clear();
         Console.WriteLine("Menu options: ");
         Console.WriteLine("  1. Start breathing activity");
         Console.WriteLine("  2. Start reflecting activity");
         Console.WriteLine("  3. Start listing activity");
-        Console.WriteLine("  4. Quit");
+        Console.WriteLine("  4. Show the number of activites done");
+        Console.WriteLine("  5. Quit");
         Console.Write("Select a choice from the menu: ");
         string option = Console.ReadLine();
 
         Console.Clear();
 
-        if(option.Equals("1", StringComparison.OrdinalIgnoreCase))
+        if(option.Equals("1"))
         {
             string description = $"This activity will help you relax by walking your through breathing in and out slowly. Clear your mind and focus on your breathing";
             string name = "Breathing";
@@ -44,6 +43,7 @@ class Program
 
                 Console.WriteLine("\n");
             }
+            breathing.SaveActivity(name);
 
             Console.WriteLine(breathing.DisplayWellDoneMessage());
             DisplayHelper.Spinner();
@@ -53,7 +53,7 @@ class Program
             Console.Write(breathing.DisplayEndMessage());
             DisplayHelper.Spinner();
         }
-        else if(option.Equals("2", StringComparison.OrdinalIgnoreCase))
+        else if(option.Equals("2"))
         {
             string description = $"This activity will help you reflect on times in your life when you have shown strength and resilience. " +
             "This will help you recognize the power you have and how you can use it in other aspects of your life.";
@@ -86,7 +86,9 @@ class Program
                 Console.Write($"> {question} ");
                 DisplayHelper.Spinner();
                 Console.WriteLine();
-            }
+            }            
+            reflect.SaveActivity(name);
+
             Console.WriteLine();
             Console.WriteLine(reflect.DisplayWellDoneMessage());
             DisplayHelper.Spinner();
@@ -95,6 +97,70 @@ class Program
             reflect.SetDuration(int.Parse(duration));
             Console.Write(reflect.DisplayEndMessage());
             DisplayHelper.Spinner();
-        }    
+        }
+        else if(option.Equals("3"))
+        {
+            string description = $"This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.";
+            string name = "Listing";
+
+            var listActivity = new ListActivity(name, description);
+
+            Console.Write(listActivity.DisplayStartMessage());
+            string duration = Console.ReadLine();
+
+            Console.Clear();
+            Console.WriteLine(listActivity.DisplayReadyMessage());
+            DisplayHelper.Spinner();
+            Console.WriteLine();
+
+            Console.WriteLine("List as many responses you can to get the following prompt:\n");
+            Console.WriteLine($"--- {listActivity.GetRandomPrompt()} ---\n");
+            Console.Write($"You may begin in: ");
+            DisplayHelper.ReverseTimer(5);
+
+            DateTime endTime = DateTime.Now.AddSeconds(double.Parse(duration));
+            Console.Clear();
+
+            while (endTime > DateTime.Now)
+            {
+                Console.Write($"> ");
+                string response = Console.ReadLine();
+                listActivity.SaveResponse(response);
+            }
+            listActivity.SaveActivity(name);
+
+            Console.WriteLine();
+            Console.WriteLine($"You listed {listActivity.GetCountResponse()} items !\n");
+            Console.WriteLine(listActivity.DisplayWellDoneMessage());
+            DisplayHelper.Spinner();
+            Console.WriteLine("\n");
+
+            listActivity.SetDuration(int.Parse(duration));
+            Console.Write(listActivity.DisplayEndMessage());
+            DisplayHelper.Spinner();
+        }
+        else if(option.Equals("4"))
+        {
+            var activity = new Activity();
+            List<ActivityInformation> listActivity = activity.ShowNumberOfActivities();
+
+            if(listActivity.Count > 0)
+            {
+                foreach(var item in listActivity)
+                {
+                    Console.WriteLine($"Activity: {item.Name} - Count: {item.Count}");
+                }
+
+                Console.WriteLine();
+            }
+            else
+            {
+                Console.WriteLine("There are no records in the list \n");
+            }
+        }
+        else if(option.Equals("5"))
+        {
+            Console.WriteLine("have a good day !!!\n");
+        }
     }
 }
