@@ -29,13 +29,13 @@ namespace Develop04
             return message;
         }
 
-        public void SetDuration(int duration){
-            _duration = duration;
-        }
+        public string DisplayReadyMessage() => $"Get ready...";
 
-        public int GetDuration(){
-            return _duration;
-        }
+        public string DisplayWellDoneMessage() => "Well done !!";
+
+        public void SetDuration(int duration) => _duration = duration;
+
+        public int GetDuration() => _duration;
 
         public void PauseScreen(){
 

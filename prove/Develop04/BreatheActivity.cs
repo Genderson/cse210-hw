@@ -9,12 +9,8 @@ namespace Develop04
     {
         public BreatheActivity(string name, string description) : base(name, description){}
 
-        public string DisplayBreatheInMessage(){
-            return "Please";
-        }
+        public string DisplayBreatheInMessage() => "Breathe in ...";
 
-        public string DisplayBreatheOutMessage(){
-            return "Done";
-        }
+        public string DisplayBreatheOutMessage() => "Now Breathe out ...";
     }
 }
