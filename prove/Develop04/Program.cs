@@ -3,6 +3,11 @@ using Develop04;
 
 class Program
 {
+    /*
+    Exceeding Requirements
+    I added the functionality of store in a json file the activities done by the user
+    Also, I added a new menu option to display the activities done by the user
+    */
     static void Main(string[] args)
     {
         Console.Clear();
@@ -29,29 +34,29 @@ class Program
 
             Console.Clear();
             Console.WriteLine(breathing.DisplayReadyMessage());
-            DisplayHelper.Spinner();
+            breathing.Spinner();
             Console.WriteLine();
 
             DateTime endTime = DateTime.Now.AddSeconds(double.Parse(duration));
 
             while (endTime > DateTime.Now){
                 Console.Write(breathing.DisplayBreatheInMessage());
-                DisplayHelper.ReverseTimer(4);                
+                breathing.ReverseTimer(4);                
                 Console.WriteLine();
                 Console.Write(breathing.DisplayBreatheOutMessage());
-                DisplayHelper.ReverseTimer(6);
+                breathing.ReverseTimer(6);
 
                 Console.WriteLine("\n");
             }
             breathing.SaveActivity(name);
 
             Console.WriteLine(breathing.DisplayWellDoneMessage());
-            DisplayHelper.Spinner();
+            breathing.Spinner();
             Console.WriteLine("\n");
 
             breathing.SetDuration(int.Parse(duration));
             Console.Write(breathing.DisplayEndMessage());
-            DisplayHelper.Spinner();
+            breathing.Spinner();
         }
         else if(option.Equals("2"))
         {
@@ -66,7 +71,7 @@ class Program
 
             Console.Clear();
             Console.WriteLine(reflect.DisplayReadyMessage());
-            DisplayHelper.Spinner();
+            reflect.Spinner();
             Console.WriteLine();
 
             Console.WriteLine("Consider the following promt:\n");
@@ -75,7 +80,7 @@ class Program
             Console.ReadLine();
             Console.WriteLine($"Now ponder on each of the following questions as they related to this experience");
             Console.Write($"You may begin in: ");
-            DisplayHelper.ReverseTimer(5);
+            reflect.ReverseTimer(5);
 
             DateTime endTime = DateTime.Now.AddSeconds(double.Parse(duration));
             Console.Clear();
@@ -84,19 +89,19 @@ class Program
             {
                 string question = reflect.GetRandomQuestion();
                 Console.Write($"> {question} ");
-                DisplayHelper.Spinner();
+                reflect.Spinner();
                 Console.WriteLine();
             }            
             reflect.SaveActivity(name);
 
             Console.WriteLine();
             Console.WriteLine(reflect.DisplayWellDoneMessage());
-            DisplayHelper.Spinner();
+            reflect.Spinner();
             Console.WriteLine("\n");
 
             reflect.SetDuration(int.Parse(duration));
             Console.Write(reflect.DisplayEndMessage());
-            DisplayHelper.Spinner();
+            reflect.Spinner();
         }
         else if(option.Equals("3"))
         {
@@ -110,13 +115,13 @@ class Program
 
             Console.Clear();
             Console.WriteLine(listActivity.DisplayReadyMessage());
-            DisplayHelper.Spinner();
+            listActivity.Spinner();
             Console.WriteLine();
 
             Console.WriteLine("List as many responses you can to get the following prompt:\n");
             Console.WriteLine($"--- {listActivity.GetRandomPrompt()} ---\n");
             Console.Write($"You may begin in: ");
-            DisplayHelper.ReverseTimer(5);
+            listActivity.ReverseTimer(5);
 
             DateTime endTime = DateTime.Now.AddSeconds(double.Parse(duration));
             Console.Clear();
@@ -132,12 +137,12 @@ class Program
             Console.WriteLine();
             Console.WriteLine($"You listed {listActivity.GetCountResponse()} items !\n");
             Console.WriteLine(listActivity.DisplayWellDoneMessage());
-            DisplayHelper.Spinner();
+            listActivity.Spinner();
             Console.WriteLine("\n");
 
             listActivity.SetDuration(int.Parse(duration));
             Console.Write(listActivity.DisplayEndMessage());
-            DisplayHelper.Spinner();
+            listActivity.Spinner();
         }
         else if(option.Equals("4"))
         {
