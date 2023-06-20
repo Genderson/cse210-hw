@@ -13,16 +13,20 @@ namespace Develop05
             _isCompleted = false;
         }
 
-
+        public void SetIsCompleted() => _isCompleted = true;
         public override string DisplayFullGoalDescription()
         {
-            string completed = _isCompleted ? "X" : " "; 
-            return $"[{completed}] {GetName()} ({GetDescription()})";           
+            return $"[{CheckIfCompleted()}] {GetName()} ({GetDescription()})";           
         }
 
         public override int RecordEvent()
         {
             throw new NotImplementedException();
+        }
+
+        private string CheckIfCompleted()
+        {
+            return _isCompleted ? "X" : " "; ;
         }
     }
 }
