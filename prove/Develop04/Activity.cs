@@ -7,9 +7,9 @@ namespace Develop04
 {
     public class Activity
     {
-        private string _name;
-        private string _description;
-        private int _duration;
+        protected string _name;
+        protected string _description;
+        protected int _duration;
         private List<ActivityInformation> _activityCount;
         private readonly File _file;
         private const string FILENAME = "ActivityLog.json";
@@ -26,6 +26,14 @@ namespace Develop04
             _name = name;
             _description = description;
             LoadFromFile();
+        }
+
+        public string DisplayStartMessage2()
+        {
+            string message = $"Welcome to the {_name} Activity.\n\n";
+            message += $"{_description}\n\n";
+            message += $"How long, in seconds, would you like for your session? ";
+            return message;
         }
 
         public string DisplayStartMessage()
