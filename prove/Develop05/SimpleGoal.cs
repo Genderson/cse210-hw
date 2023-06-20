@@ -16,7 +16,7 @@ namespace Develop05
         public void SetIsCompleted() => _isCompleted = true;
         public override string DisplayFullGoalDescription()
         {
-            return $"[{CheckIfCompleted()}] {GetName()} ({GetDescription()})";           
+            return $"[{CheckIfCompleted()}] {GetName()} ({GetDescription()}) ";           
         }
 
         public override int RecordEvent()
