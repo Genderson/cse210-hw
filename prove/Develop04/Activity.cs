@@ -28,14 +28,6 @@ namespace Develop04
             LoadFromFile();
         }
 
-        public string DisplayStartMessage2()
-        {
-            string message = $"Welcome to the {_name} Activity.\n\n";
-            message += $"{_description}\n\n";
-            message += $"How long, in seconds, would you like for your session? ";
-            return message;
-        }
-
         public string DisplayStartMessage()
         {
             string message = $"Welcome to the {_name} Activity.\n\n";
