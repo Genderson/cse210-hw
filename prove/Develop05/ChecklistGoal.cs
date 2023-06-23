@@ -11,10 +11,8 @@ namespace Develop05
         private int _timesCompleted;
         private int _bonus;
 
-        public ChecklistGoal(string name, string description, int points, int times, int bonus) : base(name, description, points)
+        public ChecklistGoal()
         {
-            _times = times;
-            _bonus = bonus;
         }
 
         public void RecordTimeCompleted()
@@ -24,7 +22,7 @@ namespace Develop05
 
         public override string DisplayFullGoalDescription()
         {
-            return $"[{CheckIfCompleted()}] {GetName()} ({GetDescription()}) -- Currently completed: {_timesCompleted}/{_times}";     
+            return $"[{CheckIfCompleted()}] {_name} ({_description}) -- Currently completed: {_timesCompleted}/{_times}";
         }
 
         public override int RecordEvent()
@@ -35,6 +33,17 @@ namespace Develop05
         private string CheckIfCompleted()
         {
             return _timesCompleted >= _times ? "X" : " ";
+        }
+
+        public override void AddGoalData()
+        {
+            base.ProcessGoal();
+
+            Console.Write("How many times does this goal need to be accomplished for a bonus? ");
+            _times = int.Parse(Console.ReadLine());
+
+            Console.Write("What is the bonus for accomplishing it that many times? ");
+            _bonus = int.Parse(Console.ReadLine());
         }
     }
 }

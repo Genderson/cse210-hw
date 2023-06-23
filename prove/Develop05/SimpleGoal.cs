@@ -8,25 +8,32 @@ namespace Develop05
     public class SimpleGoal : Goal
     {
         private bool _isCompleted;
-        public SimpleGoal(string name, string description, int points) : base(name, description, points)
+        public SimpleGoal()
         {
             _isCompleted = false;
         }
 
         public void SetIsCompleted() => _isCompleted = true;
+
         public override string DisplayFullGoalDescription()
         {
-            return $"[{CheckIfCompleted()}] {GetName()} ({GetDescription()}) ";           
+            return $"[{CheckIfCompleted()}] {_name} ({_description}) ";
         }
 
         public override int RecordEvent()
         {
-            throw new NotImplementedException();
+            SetIsCompleted();
+            return _points;
+        }
+
+        public override void AddGoalData()
+        {
+            base.ProcessGoal();
         }
 
         private string CheckIfCompleted()
         {
-            return _isCompleted ? "X" : " "; ;
+            return _isCompleted ? "X" : " ";
         }
     }
 }

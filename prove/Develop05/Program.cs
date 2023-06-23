@@ -5,18 +5,19 @@ class Program
 {
     static void Main(string[] args)
     {
-        string name = string.Empty;
-        string description = string.Empty;
-        int points;
+        //string name = string.Empty;
+        //string description = string.Empty;
+        //int points;
 
         List<Goal> goals = new List<Goal>();
 
         string option = string.Empty;
+        int points = 0;
         Console.Clear();
 
         while (option != "6")
         {            
-            Console.WriteLine("You have 0 points\n");
+            Console.WriteLine($"You have {points} points\n");
 
             Console.WriteLine("Menu Options:\n");
             Console.WriteLine("1. Create New Goal");
@@ -43,58 +44,24 @@ class Program
 
                     if (typeOfGoal == "1") //Simple Goal
                     {
-                        Console.Write("What is the name of your goal? ");
-                        name = Console.ReadLine();
-
-                        Console.Write("What is a short description of it? ");
-                        description = Console.ReadLine();
-
-                        Console.Write("What is the amount of points associated with this goal? ");
-                        points = int.Parse(Console.ReadLine());
-
-                        SimpleGoal simpleGoal = new SimpleGoal(name, description, points);
+                        SimpleGoal simpleGoal = new SimpleGoal();
+                        simpleGoal.AddGoalData();
                         goals.Add(simpleGoal);
-
-                        Console.Clear();
                     }
-                    else if(typeOfGoal == "2")
+                    else if(typeOfGoal == "2") //Eternal goal
                     {
-                        Console.Write("What is the name of your goal? ");
-                        name = Console.ReadLine();
-
-                        Console.Write("What is a short description of it? ");
-                        description = Console.ReadLine();
-
-                        Console.Write("What is the amount of points associated with this goal? ");
-                        points = int.Parse(Console.ReadLine());
-
-                        EternalGoal eternalGoal = new EternalGoal(name, description, points);
+                        EternalGoal eternalGoal = new EternalGoal();
+                        eternalGoal.AddGoalData();
                         goals.Add(eternalGoal);
-
-                        Console.Clear();
                     }
                     else if(typeOfGoal == "3")
                     {
-                        Console.Write("What is the name of your goal? ");
-                        name = Console.ReadLine();
-
-                        Console.Write("What is a short description of it? ");
-                        description = Console.ReadLine();
-
-                        Console.Write("What is the amount of points associated with this goal? ");
-                        points = int.Parse(Console.ReadLine());
-
-                        Console.Write("How many times does this goal need to be accomplished for a bonus? ");
-                        int times = int.Parse(Console.ReadLine());
-
-                        Console.Write("What is the bonus for accomplishing it that many times? ");
-                        int bonus = int.Parse(Console.ReadLine());
-
-                        ChecklistGoal checklistGoal = new ChecklistGoal(name, description, points, times, bonus);
+                        ChecklistGoal checklistGoal = new ChecklistGoal();
+                        checklistGoal.AddGoalData();
                         goals.Add(checklistGoal);
-
-                        Console.Clear();
                     }
+
+                    Console.Clear();
                     break;
 
                 case "2": //List goals
@@ -126,7 +93,11 @@ class Program
                     }
 
                     Console.Write("Which goal did you accomplish? ");
-                    typeOfGoal = Console.ReadLine();
+                    Console.WriteLine();
+                    
+                    int goalSelected = int.Parse(Console.ReadLine());
+                    var goal = goals[goalSelected - 1];
+                    points += goal.RecordEvent();
 
                     break;
 
@@ -134,7 +105,5 @@ class Program
                     break;
             }
         }
-
-
     }
 }

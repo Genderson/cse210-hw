@@ -8,9 +8,9 @@ namespace Develop05
     public abstract class Goal
     {
         protected string _name;
-        private string _description;
-        private int _points;
-
+        protected string _description;
+        protected int _points;
+        protected List<Goal> _goals = new List<Goal>();
         public Goal(){}
 
         public Goal(string name, string description, int points)
@@ -35,8 +35,21 @@ namespace Develop05
             return _points;
         }
         
+        
+        protected virtual void ProcessGoal()
+        {
+            Console.Write("What is the name of your goal? ");
+            _name = Console.ReadLine();
+
+            Console.Write("What is a short description of it? ");
+            _description = Console.ReadLine();
+
+            Console.Write("What is the amount of points associated with this goal? ");
+            _points = int.Parse(Console.ReadLine());
+        }
+
         public abstract string DisplayFullGoalDescription();
         public abstract int RecordEvent();
-
+        public abstract void AddGoalData();
     }
 }

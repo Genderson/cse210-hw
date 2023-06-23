@@ -7,12 +7,16 @@ namespace Develop05
 {
     public class EternalGoal : Goal
     {
-        public EternalGoal(string name, string description, int points) : base(name, description, points){}
+        public EternalGoal() { }
 
+        public override void AddGoalData()
+        {
+            base.ProcessGoal();
+        }
 
         public override string DisplayFullGoalDescription()
         {
-            return $"[ ] {GetName()} ({GetDescription()})";           
+            return $"[ ] {_name} ({_description})";
         }
 
         public override int RecordEvent()
