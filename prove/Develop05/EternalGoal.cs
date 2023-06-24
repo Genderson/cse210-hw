@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Develop05
 {
@@ -9,19 +5,16 @@ namespace Develop05
     {
         public EternalGoal() { }
 
-        public override void AddGoalData()
-        {
-            base.ProcessGoal();
-        }
+        public EternalGoal(string name, string description, int points):base(name, description, points) {}
 
-        public override string DisplayFullGoalDescription()
-        {
-            return $"[ ] {_name} ({_description})";
-        }
-
+        public override void AddGoalData() => base.ProcessGoal();
+        public override string DisplayFullGoalDescription() => $"[ ] {_name} ({_description})";
         public override int RecordEvent()
         {
-            return GetPoints();
+            Console.WriteLine($"Congratulations! You have earned {_points} points!");
+            return _points;
         }
+        public override bool CheckIfCompleted() => false;
+        public override string FormatTextToFile() => $"EternalGoal|{_name}|{_description}|{_points}";
     }
 }

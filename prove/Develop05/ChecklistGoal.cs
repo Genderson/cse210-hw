@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Develop05
 {
@@ -15,24 +11,22 @@ namespace Develop05
         {
         }
 
-        public void RecordTimeCompleted()
+        public ChecklistGoal(string name, string description, int points, int times, int timesCompleted, int bonus):base(name, description, points) 
         {
-            _timesCompleted += _timesCompleted;
+            _times = times;
+            _timesCompleted = timesCompleted;
+            _bonus = bonus;
         }
 
-        public override string DisplayFullGoalDescription()
-        {
-            return $"[{CheckIfCompleted()}] {_name} ({_description}) -- Currently completed: {_timesCompleted}/{_times}";
-        }
+        public void RecordTimeCompleted() => _timesCompleted = _timesCompleted + 1;
+        public override string DisplayFullGoalDescription() => $"[{GetMarkIfCompleted()}] {_name} ({_description}) -- Currently completed: {_timesCompleted}/{_times}";
 
         public override int RecordEvent()
         {
-            throw new NotImplementedException();
-        }
-
-        private string CheckIfCompleted()
-        {
-            return _timesCompleted >= _times ? "X" : " ";
+            RecordTimeCompleted();
+            int totalPoints = _timesCompleted >= _times ? _points + _bonus : _points;
+            Console.WriteLine($"Congratulations! You have earned {totalPoints} points!");
+            return totalPoints;
         }
 
         public override void AddGoalData()
@@ -45,5 +39,11 @@ namespace Develop05
             Console.Write("What is the bonus for accomplishing it that many times? ");
             _bonus = int.Parse(Console.ReadLine());
         }
+
+        public override bool CheckIfCompleted() => _timesCompleted >= _times;
+        public override string FormatTextToFile() => $"ChecklistGoal|{_name}|{_description}|{_points}|{_times}|{_timesCompleted}|{_bonus}";
+
+        private string GetMarkIfCompleted() => _timesCompleted >= _times ? "X" : " ";
+
     }
 }

@@ -10,7 +10,7 @@ namespace Develop05
         protected string _name;
         protected string _description;
         protected int _points;
-        protected List<Goal> _goals = new List<Goal>();
+        
         public Goal(){}
 
         public Goal(string name, string description, int points)
@@ -20,22 +20,7 @@ namespace Develop05
             _points = points;
         }
 
-        public string GetName()
-        {
-            return $"{_name}";           
-        }
-
-        protected string GetDescription()
-        {
-            return _description;           
-        }
-
-        protected int GetPoints()
-        {
-            return _points;
-        }
-        
-        
+        public string GetName() => $"{_name}";
         protected virtual void ProcessGoal()
         {
             Console.Write("What is the name of your goal? ");
@@ -51,5 +36,7 @@ namespace Develop05
         public abstract string DisplayFullGoalDescription();
         public abstract int RecordEvent();
         public abstract void AddGoalData();
+        public abstract bool CheckIfCompleted();
+        public abstract string FormatTextToFile();
     }
 }
