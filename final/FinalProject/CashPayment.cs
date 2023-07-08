@@ -7,6 +7,10 @@ namespace FinalProject
 {
     public class CashPayment : Payment
     {
+        public CashPayment(double cost) : base(cost)
+        {
+        }
+
         public override string DisplayPaymentDescription()
         {
             throw new NotImplementedException();
@@ -15,8 +19,6 @@ namespace FinalProject
         public override void RecordPayment()
         {
             throw new NotImplementedException();
-        }
-
-        
+        }       
     }
 }

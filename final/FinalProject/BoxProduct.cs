@@ -11,7 +11,7 @@ namespace FinalProject
         private double _length;
         private double _width;
         
-        public BoxProduct(int weight, Country origin, Country destination, Transport transport, double height, double length, double width): base(weight, origin, destination, transport)
+        public BoxProduct(double weight, Country origin, Country destination, Transport transport, double height, double length, double width): base(weight, origin, destination, transport)
         {
             _height = height;
             _length = length;
@@ -25,11 +25,6 @@ namespace FinalProject
             var volumeCost = GetVolumeCost();
             _totalCost = (transportCost + volumeCost) * destinationTax;
         }
-
-        /*public override string DisplayShippingDescription()
-        {
-            throw new NotImplementedException();
-        }*/
 
         private double GetVolumeCost() => (_height * _width * _length) * 27;
     }

@@ -12,6 +12,10 @@ namespace FinalProject
         private string _expirationDate;
         private long _cardNumber;
 
+        public DebitCardPayment(double cost) : base(cost)
+        {
+        }
+
         public override string DisplayPaymentDescription()
         {
             throw new NotImplementedException();

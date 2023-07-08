@@ -7,7 +7,12 @@ namespace FinalProject
 {
     public abstract class Payment
     {
-        protected float _cost;
+        protected double _cost;
+
+        public Payment(double cost)
+        {
+            _cost = cost;
+        }   
         
         public abstract void RecordPayment();
         public abstract string DisplayPaymentDescription();        

@@ -17,6 +17,6 @@ namespace FinalProject
         }
 
         public abstract int DeliveryTime();
-        public abstract float CalculateCost();
+        public abstract double CalculateCost();
     }
 }
