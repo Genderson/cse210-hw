@@ -7,9 +7,9 @@ namespace Develop04
 {
     public class Activity
     {
-        private string _name;
-        private string _description;
-        private int _duration;
+        protected string _name;
+        protected string _description;
+        protected int _duration;
         private List<ActivityInformation> _activityCount;
         private readonly File _file;
         private const string FILENAME = "ActivityLog.json";
