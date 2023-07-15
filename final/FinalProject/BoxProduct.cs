@@ -10,12 +10,24 @@ namespace FinalProject
         private double _height;
         private double _length;
         private double _width;
-        
-        public BoxProduct(double weight, Country origin, Country destination, Transport transport, double height, double length, double width): base(weight, origin, destination, transport)
+        private const double MULTIPLIER = 1.8;
+
+        public BoxProduct(double weight, Country origin, Country destination, Transport transport, double height, double length, double width) : base(weight, origin, destination, transport)
         {
             _height = height;
             _length = length;
             _width = width;
+        }
+
+        public BoxProduct(double weight, Country origin, Country destination, Transport transport, double height, double length, double width, double totalCost, bool isAlreadyPaid) : base(weight, origin, destination, transport, totalCost, isAlreadyPaid)
+        {
+
+        }
+
+        public override string DisplayProduct()
+        {
+            string payStatus = _isAlreadyPaid ? "Done" : "Pending";
+            return $"Product: Box - Origin:{_origin.GetName()} - Destination:{_destination.GetName()} - Pay:{payStatus}";
         }
 
         public override void CalculateShipping()
@@ -26,6 +38,8 @@ namespace FinalProject
             _totalCost = (transportCost + volumeCost) * destinationTax;
         }
 
-        private double GetVolumeCost() => (_height * _width * _length) * 27;
+        public override string FormatTextToFile() => $"Box|{_weight}|{_origin.GetCode()}|{_destination.GetCode()}|{_transport.GetType()}|{_transport.GetDeliveryType()}|{_totalCost}|{_isAlreadyPaid}|{_height}|{_length}|{_width}";
+
+        private double GetVolumeCost() => (_height * _width * _length) * MULTIPLIER;
     }
 }

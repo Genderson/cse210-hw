@@ -16,7 +16,7 @@ namespace FinalProject
             }
             else
             {
-                transport = new PlaneTransport(transportType);
+                transport = new PlaneTransport(deliveryType);
             }
 
             return transport;

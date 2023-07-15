@@ -7,18 +7,22 @@ namespace FinalProject
 {
     public class CashPayment : Payment
     {
-        public CashPayment(double cost) : base(cost)
+        public CashPayment()
         {
         }
 
-        public override string DisplayPaymentDescription()
+        public override void DisplayPaymentDescription()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Processing the payment ...");
+            Spinner();
+            Console.WriteLine("\nThanks for your payment");
+            Console.WriteLine();
         }
 
-        public override void RecordPayment()
+        public override void ProcessPayment(double cost)
         {
-            throw new NotImplementedException();
-        }       
+            Console.Write($"Please enter ${double.Round(cost)}: ");
+            Console.ReadLine();
+        }
     }
 }

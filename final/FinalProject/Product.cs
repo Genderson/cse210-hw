@@ -12,6 +12,7 @@ namespace FinalProject
         protected Country _destination;
         protected Transport _transport;
         protected double _totalCost;
+        protected bool _isAlreadyPaid;
 
         public Product(double weight, Country origin, Country destination, Transport transport)
         {
@@ -19,8 +20,21 @@ namespace FinalProject
             _origin = origin;
             _destination = destination;
             _transport = transport;
+            _isAlreadyPaid = false;
         }
 
+        public Product(double weight, Country origin, Country destination, Transport transport, double totalCost, bool isAlreadyPaid)
+        {
+            _weight = weight;
+            _origin = origin;
+            _destination = destination;
+            _transport = transport;
+            _totalCost = totalCost;
+            _isAlreadyPaid = isAlreadyPaid;
+        }
+
+        public bool GetIsPaid() => _isAlreadyPaid;
+        public void SetIsPaid() => _isAlreadyPaid = true;
         public virtual double GetDestinationTax() => _origin != _destination  ? _destination.GetTax() : 1;
         public virtual string DisplayShippingDescription()        
         {
@@ -29,13 +43,14 @@ namespace FinalProject
                 Origin: {_origin.GetName()}
                 Destination: {_destination.GetName()}
                 Destination Tax: {_destination.GetTax()}
-                Price: ${_totalCost}
+                Price: ${double.Round(_totalCost)}
                 Delivery time: {_transport.DeliveryTime()} days";
-
             return result;
         }
-        public virtual double GetTotalCost() => _totalCost; 
-        
+        public virtual double GetTotalCost() => _totalCost;      
+
+        public abstract string DisplayProduct();
         public abstract void CalculateShipping();
+        public abstract string FormatTextToFile();
     }
 }

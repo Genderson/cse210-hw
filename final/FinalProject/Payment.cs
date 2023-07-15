@@ -7,14 +7,32 @@ namespace FinalProject
 {
     public abstract class Payment
     {
-        protected double _cost;
-
-        public Payment(double cost)
+        public Payment()
         {
-            _cost = cost;
+
         }   
         
-        public abstract void RecordPayment();
-        public abstract string DisplayPaymentDescription();        
+        protected void Spinner()
+        {
+            List<string> animationCharacters = new List<string>();
+            animationCharacters.Add("|");
+            animationCharacters.Add("/");
+            animationCharacters.Add("-");
+            animationCharacters.Add("\\");
+            animationCharacters.Add("|");
+            animationCharacters.Add("/");
+            animationCharacters.Add("-");
+            animationCharacters.Add("\\");
+
+            foreach(string animationCharacter in animationCharacters)
+            {
+                Console.Write(animationCharacter);
+                Thread.Sleep(1000);
+                Console.Write("\b \b");
+            }   
+        }
+
+        public abstract void ProcessPayment(double cost);
+        public abstract void DisplayPaymentDescription();        
     }
 }

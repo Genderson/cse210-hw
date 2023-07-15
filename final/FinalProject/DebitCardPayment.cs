@@ -8,22 +8,29 @@ namespace FinalProject
     public class DebitCardPayment : Payment
     {
         private string _cardOwner;
-        private int _securityCode;
         private string _expirationDate;
         private long _cardNumber;
 
-        public DebitCardPayment(double cost) : base(cost)
+        public DebitCardPayment()
         {
         }
 
-        public override string DisplayPaymentDescription()
+        public override void DisplayPaymentDescription()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Processing the payment ...");
+            Spinner();
+            Console.WriteLine($"\nThanks {_cardOwner} for your payment");
+            Console.WriteLine();
         }
 
-        public override void RecordPayment()
+        public override void ProcessPayment(double cost)
         {
-            throw new NotImplementedException();
+            Console.Write($"Please enter the card owner: ");
+            _cardOwner = Console.ReadLine();
+            Console.Write($"Please enter the card number: ");
+            _cardNumber = long.Parse(Console.ReadLine());
+            Console.Write($"Please enter the expiration date (MM/yy): ");
+            _expirationDate = Console.ReadLine();    
         }
     }
 }

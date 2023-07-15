@@ -13,6 +13,6 @@ namespace FinalProject
 
         //1: standard
         public override int DeliveryTime() => _deliveryType == "1" ? 10 : 7;
-        public override double CalculateCost() => _deliveryType == "1" ? 1000 : 1700;        
+        public override double CalculateCost() => _deliveryType == "1" ? 600 : 1000;
     }
 }

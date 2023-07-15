@@ -10,17 +10,17 @@ namespace FinalProject
         public static Payment CreatePayment(string paymentMethod)
         {
             Payment payment = null;
-            if (paymentMethod == "1") //cash
+            if (paymentMethod == "1")
             {
-                payment = new CashPayment(0);
+                payment = new CashPayment();
             }
-            else if (paymentMethod == "2") //debitcard
+            else if (paymentMethod == "2")
             {
-                payment = new DebitCardPayment(0);
+                payment = new DebitCardPayment();
             }
-            else //creditcard
+            else
             {
-                payment = new CreditCardPayment(0);
+                payment = new CreditCardPayment();
             }
 
             return payment;
